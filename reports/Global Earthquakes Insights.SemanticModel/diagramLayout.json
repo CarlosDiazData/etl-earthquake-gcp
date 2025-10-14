@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 196
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 662.09638940934485,
+            "y": 658.26686521473687
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "c8a9a681-3d08-4c63-8c81-f542445328b6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 55.5235441924234,
+            "y": 754.50874397650091
+          },
+          "nodeIndex": "dim_event_type",
+          "nodeLineageTag": "20f28eb4-e4e3-4876-9939-b8285cd0c687",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 327.08646847001887,
+            "y": 0
+          },
+          "nodeIndex": "dim_location",
+          "nodeLineageTag": "42b7eb1d-1c0c-4d9a-9fd8-f67cd4cbac40",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 628.26117831117836,
+            "y": 215.09861414115176
+          },
+          "nodeIndex": "dim_magnitude",
+          "nodeLineageTag": "71862839-3497-452f-96c1-55e57e8f7206",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 311.79894344873446,
+            "y": 427.56557247942897
+          },
+          "nodeIndex": "fact_earthquake_events",
+          "nodeLineageTag": "824501e4-3059-4f62-ab28-b8b64e8d510f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 15,
+            "y": 121.44016172485431
+          },
+          "nodeIndex": "tsunami_predictions",
+          "nodeLineageTag": "7bc474ff-3d48-4f8e-a392-64fa6258822c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

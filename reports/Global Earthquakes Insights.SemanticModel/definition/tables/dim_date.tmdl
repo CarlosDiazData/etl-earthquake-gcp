@@ -1,0 +1,109 @@
+table dim_date
+	lineageTag: c8a9a681-3d08-4c63-8c81-f542445328b6
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c666ea3-0053-4ed5-a32f-8d5834dfd1d3
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: e2e4e716-f3b6-4f99-9a11-f09deb5086cc
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e594a42-6964-453a-95e6-5375ac55a5e3
+		summarizeBy: sum
+		sourceColumn: DayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: eeffd738-334e-48c7-ad73-7939d2bc0142
+		summarizeBy: sum
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a2ee29da-56f8-4ddf-8d24-01aa4314291b
+		summarizeBy: none
+		sourceColumn: FullDate
+
+		variation Variation
+			isDefault
+			relationship: 5c81f206-266f-4647-825e-379340bcda3f
+			defaultHierarchy: LocalDateTable_eda5f033-0d09-4b07-b4e9-2ab0407d87da.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsWeekend
+		dataType: int64
+		formatString: 0
+		lineageTag: a7525859-f8d3-4749-9d09-44d2eaa6ba73
+		summarizeBy: sum
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 8766075a-4f55-48d0-b7f8-ed0abad5ea55
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 10af9106-1631-4d49-be9e-d7142c6e029e
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 236d7d81-02ff-4bb5-818c-40e475824b8c
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4462a897-d4e2-4a50-8470-ca855e5bf50d
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    dim_date_Table = gold_earthquakes_Schema{[Name="dim_date",Kind="Table"]}[Data]
+				in
+				    dim_date_Table
+

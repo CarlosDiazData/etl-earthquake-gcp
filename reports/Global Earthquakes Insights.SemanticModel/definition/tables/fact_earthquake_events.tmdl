@@ -1,0 +1,172 @@
+table fact_earthquake_events
+	lineageTag: 824501e4-3059-4f62-ab28-b8b64e8d510f
+
+	column EventID
+		dataType: string
+		lineageTag: 9be2e052-46e2-484d-b5b3-840a5cabb9a2
+		summarizeBy: none
+		sourceColumn: EventID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4eb2a227-8475-4983-ab33-c83cc1b79950
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ab536670-97fc-49dd-ac97-0919b9b6166c
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MagnitudeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e2135a5-4cba-45b6-ae88-b5f1f0e3c0bd
+		summarizeBy: none
+		sourceColumn: MagnitudeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventTypeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 205190c3-e61c-4b8d-a212-544f253db3ac
+		summarizeBy: none
+		sourceColumn: EventTypeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Magnitude
+		dataType: double
+		lineageTag: 666e4624-84c1-49ed-b8c6-f53453d1dbc0
+		summarizeBy: sum
+		sourceColumn: Magnitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DepthKm
+		dataType: double
+		lineageTag: f7ae662f-dc64-4239-ab78-1fd5446ef2d5
+		summarizeBy: sum
+		sourceColumn: DepthKm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TsunamiWarning
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 904ca91d-f5f8-422e-9ce4-1c80d5e76dc8
+		summarizeBy: none
+		sourceColumn: TsunamiWarning
+
+		annotation SummarizationSetBy = Automatic
+
+	column Significance
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d5e21b6-6e3b-4b4a-a4db-77cf7f286399
+		summarizeBy: sum
+		sourceColumn: Significance
+
+		annotation SummarizationSetBy = Automatic
+
+	column FeltReports
+		dataType: int64
+		formatString: 0
+		lineageTag: 190bb782-29ea-424d-9601-84414283891d
+		summarizeBy: sum
+		sourceColumn: FeltReports
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumberOfStations
+		dataType: int64
+		formatString: 0
+		lineageTag: 55fb39c7-6123-4dfb-8c24-30691f35fb7f
+		summarizeBy: sum
+		sourceColumn: NumberOfStations
+
+		annotation SummarizationSetBy = Automatic
+
+	column RmsTravelTime
+		dataType: double
+		lineageTag: 2ccaaa2b-d38e-43cc-94bc-c04b49a8bba7
+		summarizeBy: sum
+		sourceColumn: RmsTravelTime
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AzimuthalGap
+		dataType: double
+		lineageTag: af640f6c-4b31-4afb-a56d-73b42c2fd816
+		summarizeBy: sum
+		sourceColumn: AzimuthalGap
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SourceURL
+		dataType: string
+		lineageTag: 8081e2cb-ccab-43a0-bdd3-58a3ec3bcce1
+		summarizeBy: none
+		sourceColumn: SourceURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column SilverProcessingTimestampUTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1afb89a3-8b9e-4e14-9d67-f4b4d1eaf1cc
+		summarizeBy: none
+		sourceColumn: SilverProcessingTimestampUTC
+
+		variation Variation
+			isDefault
+			relationship: b3485447-9eaf-470f-849b-784270c1ad36
+			defaultHierarchy: LocalDateTable_94d2487e-ecc8-41dd-af8d-8ffc77314711.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DWLoadTimestampUTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b790a8ef-7ca6-40e4-b83d-90b54db3b4dd
+		summarizeBy: none
+		sourceColumn: DWLoadTimestampUTC
+
+		variation Variation
+			isDefault
+			relationship: 42f08374-2c14-41fa-b701-131e0e50abf8
+			defaultHierarchy: LocalDateTable_9179d612-24db-4a3d-bc4c-fc92db33f758.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_earthquake_events = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    fact_earthquake_events_Table = gold_earthquakes_Schema{[Name="fact_earthquake_events",Kind="Table"]}[Data]
+				in
+				    fact_earthquake_events_Table
+
+	annotation PBI_ResultType = Table
+

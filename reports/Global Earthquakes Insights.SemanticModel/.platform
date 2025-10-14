@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Global Earthquakes Insights"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "421f61f3-cbeb-4d0f-9fe8-890f69d25029"
+  }
+}

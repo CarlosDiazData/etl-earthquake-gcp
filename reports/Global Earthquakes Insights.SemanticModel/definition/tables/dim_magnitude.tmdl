@@ -1,0 +1,61 @@
+table dim_magnitude
+	lineageTag: 71862839-3497-452f-96c1-55e57e8f7206
+
+	column Description
+		dataType: string
+		lineageTag: 4d7d56ed-8183-42a7-8a01-7732e7f1d270
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column MagnitudeCategory
+		dataType: string
+		lineageTag: 6bbe2586-789d-4abb-aefb-70ae483046aa
+		summarizeBy: none
+		sourceColumn: MagnitudeCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxMagnitude
+		dataType: double
+		lineageTag: 1400eaa4-d773-43a1-a2ea-08dbcae7b10f
+		summarizeBy: none
+		sourceColumn: MaxMagnitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MinMagnitude
+		dataType: double
+		lineageTag: 7f510e5c-aeaa-48c0-924e-0daf5246be7f
+		summarizeBy: none
+		sourceColumn: MinMagnitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MagnitudeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 54d434cc-7b3a-46a3-9bbf-e3c39ee59c65
+		summarizeBy: none
+		sourceColumn: MagnitudeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_magnitude = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    dim_magnitude_Table = gold_earthquakes_Schema{[Name="dim_magnitude",Kind="Table"]}[Data]
+				in
+				    dim_magnitude_Table
+
+	annotation PBI_ResultType = Table
+

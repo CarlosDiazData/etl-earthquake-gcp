@@ -1,0 +1,66 @@
+table tsunami_predictions
+	lineageTag: 7bc474ff-3d48-4f8e-a392-64fa6258822c
+
+	column event_id
+		dataType: string
+		lineageTag: b69a9495-0c56-4af2-b422-1d1d3ec526ad
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual_tsunami_warning
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ae32155e-b4bc-448a-b512-2364fb93e6ab
+		summarizeBy: none
+		sourceColumn: actual_tsunami_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_tsunami_warning
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b8b3325a-b4b2-4b4d-9e51-97c6c912073f
+		summarizeBy: none
+		sourceColumn: predicted_tsunami_warning
+
+		annotation SummarizationSetBy = Automatic
+
+	column tsunami_probability
+		dataType: double
+		lineageTag: 08a9d7f8-4dfb-4d85-acbd-0061bc52f7d0
+		summarizeBy: sum
+		sourceColumn: tsunami_probability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column prediction_timestamp_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2cc462d3-a51b-413a-ac38-22e6314d886a
+		summarizeBy: none
+		sourceColumn: prediction_timestamp_utc
+
+		variation Variation
+			isDefault
+			relationship: 49bc3509-ef71-43c9-9cac-bab58122f1cf
+			defaultHierarchy: LocalDateTable_388f9947-5207-425a-bfef-0d0703ea89df.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition tsunami_predictions = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    tsunami_predictions_Table = gold_earthquakes_Schema{[Name="tsunami_predictions",Kind="Table"]}[Data]
+				in
+				    tsunami_predictions_Table
+
+	annotation PBI_ResultType = Table
+

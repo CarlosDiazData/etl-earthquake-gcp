@@ -1,0 +1,28 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-MX
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_date","dim_event_type","dim_location","dim_magnitude","fact_earthquake_events","tsunami_predictions"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_date
+ref table DateTableTemplate_bd12c23d-2b36-4a73-821d-bf5722198ea8
+ref table LocalDateTable_eda5f033-0d09-4b07-b4e9-2ab0407d87da
+ref table dim_event_type
+ref table dim_location
+ref table dim_magnitude
+ref table fact_earthquake_events
+ref table LocalDateTable_94d2487e-ecc8-41dd-af8d-8ffc77314711
+ref table LocalDateTable_9179d612-24db-4a3d-bc4c-fc92db33f758
+ref table tsunami_predictions
+ref table LocalDateTable_388f9947-5207-425a-bfef-0d0703ea89df
+
+ref cultureInfo en-US
+

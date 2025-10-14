@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "61e62bfb49227a09890e",
+  "position": {
+    "x": 1093.2275971451229,
+    "y": 0,
+    "z": 9000,
+    "height": 59.888977002379065,
+    "width": 186.7724028548771,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_earthquake_events"
+                    }
+                  },
+                  "Property": "TsunamiWarning"
+                }
+              },
+              "queryRef": "fact_earthquake_events.TsunamiWarning",
+              "nativeQueryRef": "TsunamiWarning",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tsunami Alert'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "991d5ab74e9a8e2b90ec",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_earthquake_events"
+              }
+            },
+            "Property": "TsunamiWarning"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

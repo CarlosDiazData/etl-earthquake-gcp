@@ -1,0 +1,41 @@
+table dim_event_type
+	lineageTag: 20f28eb4-e4e3-4876-9939-b8285cd0c687
+
+	column event_type
+		dataType: string
+		lineageTag: 565f7dce-d942-4160-a341-224ca5b1f1c4
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column magType
+		dataType: string
+		lineageTag: 17c750c7-2ec0-4b74-be03-4f4fe846e925
+		summarizeBy: none
+		sourceColumn: magType
+
+		annotation SummarizationSetBy = Automatic
+
+	column EventTypeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 71ac4895-5317-47fe-a63a-fdc3ab57f695
+		summarizeBy: none
+		sourceColumn: EventTypeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_event_type = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    dim_event_type_Table = gold_earthquakes_Schema{[Name="dim_event_type",Kind="Table"]}[Data]
+				in
+				    dim_event_type_Table
+
+	annotation PBI_ResultType = Table
+

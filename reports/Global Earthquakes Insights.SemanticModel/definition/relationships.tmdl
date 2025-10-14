@@ -1,0 +1,42 @@
+relationship 5c81f206-266f-4647-825e-379340bcda3f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date.FullDate
+	toColumn: LocalDateTable_eda5f033-0d09-4b07-b4e9-2ab0407d87da.Date
+
+relationship b3485447-9eaf-470f-849b-784270c1ad36
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_earthquake_events.SilverProcessingTimestampUTC
+	toColumn: LocalDateTable_94d2487e-ecc8-41dd-af8d-8ffc77314711.Date
+
+relationship 42f08374-2c14-41fa-b701-131e0e50abf8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_earthquake_events.DWLoadTimestampUTC
+	toColumn: LocalDateTable_9179d612-24db-4a3d-bc4c-fc92db33f758.Date
+
+relationship 49bc3509-ef71-43c9-9cac-bab58122f1cf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: tsunami_predictions.prediction_timestamp_utc
+	toColumn: LocalDateTable_388f9947-5207-425a-bfef-0d0703ea89df.Date
+
+relationship AutoDetected_2c18e184-b4c8-41e3-9cef-47c78c469d99
+	fromColumn: fact_earthquake_events.DateKey
+	toColumn: dim_date.DateKey
+
+relationship AutoDetected_d758b8e2-2180-4a90-98bc-422a90057203
+	fromColumn: fact_earthquake_events.EventTypeKey
+	toColumn: dim_event_type.EventTypeKey
+
+relationship AutoDetected_0f2d5278-5454-42f4-8597-8e77e9b17f4f
+	fromColumn: fact_earthquake_events.LocationKey
+	toColumn: dim_location.LocationKey
+
+relationship AutoDetected_22c74991-7170-4226-b12a-568dcfaad003
+	fromColumn: fact_earthquake_events.MagnitudeKey
+	toColumn: dim_magnitude.MagnitudeKey
+
+relationship AutoDetected_b325f544-c9c6-41c4-9a8f-54db15262727
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_earthquake_events.EventID
+	toColumn: tsunami_predictions.event_id
+

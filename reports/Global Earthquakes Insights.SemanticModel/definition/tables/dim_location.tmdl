@@ -1,0 +1,85 @@
+table dim_location
+	lineageTag: 42b7eb1d-1c0c-4d9a-9fd8-f67cd4cbac40
+
+	column latitude
+		dataType: double
+		lineageTag: 8dc56ff8-16d2-482b-94b5-9b903d43d237
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 2bd2eba8-8efd-44aa-b7b5-6f14871e6f1f
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column place
+		dataType: string
+		lineageTag: 41b686f3-bfc0-42f3-b015-e68282ebd557
+		summarizeBy: none
+		sourceColumn: place
+
+		annotation SummarizationSetBy = Automatic
+
+	column extracted_country
+		dataType: string
+		lineageTag: c07bc159-5d69-46cd-93b7-9a85c1e6a63b
+		summarizeBy: none
+		sourceColumn: extracted_country
+
+		annotation SummarizationSetBy = Automatic
+
+	column extracted_region_detail
+		dataType: string
+		lineageTag: b19afc07-8eab-4b98-a6ad-83b9836c27ec
+		summarizeBy: none
+		sourceColumn: extracted_region_detail
+
+		annotation SummarizationSetBy = Automatic
+
+	column hemisphere_ns
+		dataType: string
+		lineageTag: 31d74f5a-c270-4fc5-a51a-82843a0de93c
+		summarizeBy: none
+		sourceColumn: hemisphere_ns
+
+		annotation SummarizationSetBy = Automatic
+
+	column hemisphere_ew
+		dataType: string
+		lineageTag: a935d474-9c06-4e18-8bbf-bc70592916ce
+		summarizeBy: none
+		sourceColumn: hemisphere_ew
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a85bb7c-7896-461f-a188-47243229c9bb
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_location = m
+		mode: import
+		source =
+				let
+				    Source = GoogleBigQuery.Database([Implementation="2.0"]),
+				    #"seismic-etl-pipeline_Database" = Source{[Name="seismic-etl-pipeline",Kind="Database"]}[Data],
+				    gold_earthquakes_Schema = #"seismic-etl-pipeline_Database"{[Name="gold_earthquakes",Kind="Schema"]}[Data],
+				    dim_location_Table = gold_earthquakes_Schema{[Name="dim_location",Kind="Table"]}[Data]
+				in
+				    dim_location_Table
+
+	annotation PBI_ResultType = Table
+
