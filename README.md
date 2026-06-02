@@ -1,5 +1,11 @@
 # End-to-End Earthquake Analysis ETL Pipeline with ML and Power BI
 
+[![GCP](https://img.shields.io/badge/GCP-Cloud_Functions_%7C_Dataproc_%7C_BigQuery-blue)](https://cloud.google.com/)
+[![Python](https://img.shields.io/badge/Python-3.9-blue)](https://www.python.org/)
+[![Airflow](https://img.shields.io/badge/Apache-Airflow_2.7-brightgreen)](https://airflow.apache.org/)
+[![PySpark](https://img.shields.io/badge/PySpark-Dataproc_Serverless-red)](https://spark.apache.org/)
+[![Power BI](https://img.shields.io/badge/Power_BI-Dashboard-yellow)](https://powerbi.microsoft.com/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE.txt)
 
 
 This project implements a complete, automated, end-to-end data pipeline on Google Cloud Platform. It ingests global earthquake data from the USGS API, processes it through a robust Medallion architecture, trains a machine learning model to predict tsunami likelihood, and loads the modeled data into a BigQuery data warehouse. The entire workflow is orchestrated with Apache Airflow.
